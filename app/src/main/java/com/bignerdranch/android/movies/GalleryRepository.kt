@@ -33,9 +33,9 @@ class GalleryRepository private constructor(context: Context) {
         }
     }
 
-    fun deleteMovie(movie: Item) {
+    fun deleteMovie() {
         executor.execute {
-            database.galleryDao().deletemovie(movie.id)
+            database.galleryDao().deletemovie()
         }
     }
 

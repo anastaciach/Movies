@@ -2,6 +2,8 @@ package com.bignerdranch.android.movies
 import com.google.gson.annotations.SerializedName
 data class GalleryItem(
     var title: String = "",
+    var year: String = "",
+    var type: String = "",
     var id: String = "",
-    @SerializedName("url_s") var url: String = ""
+    @SerializedName("i") var url: String = ""
 )
