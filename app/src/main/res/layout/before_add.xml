@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <SearchView
-        android:layout_width="20dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         app:layout_constraintEnd_toEndOf="@+id/movie_title"
         app:layout_constraintTop_toTopOf="@+id/movie_title" />
