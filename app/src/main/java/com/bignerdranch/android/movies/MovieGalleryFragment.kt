@@ -74,6 +74,9 @@ class MovieGalleryFragment : Fragment() {
                 }
                 items?.let {
                     movieRecyclerView.adapter = MovieAdapter(items)
+                    if (items.isEmpty()) {
+                        callbacks?.noItems()
+                    }
                 }
             })
 
@@ -158,7 +161,9 @@ class MovieGalleryFragment : Fragment() {
                 super.onOptionsItemSelected(item)
         }
     }
-
+    private fun onDeleteSelected() {
+        movieGalleryViewModel.deleteMovie()
+    }
     companion object {
         fun newInstance() = MovieGalleryFragment()
     }
