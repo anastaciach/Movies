@@ -8,15 +8,10 @@ import okhttp3.Response
 private const val API_KEY = "eacbbfd9"
 class MovieInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest: Request =
-            chain.request()
+        val originalRequest: Request = chain.request()
         val newUrl: HttpUrl =
             originalRequest.url().newBuilder()
-                .addQueryParameter("api_key", API_KEY)
-                .addQueryParameter("format", "json")
-                .addQueryParameter("nojsoncallback", "1")
-                .addQueryParameter("extras", "url_s")
-                .addQueryParameter("safesearch", "1")
+                .addQueryParameter("apikey", API_KEY)
                 .build()
         val newRequest: Request =
             originalRequest.newBuilder()

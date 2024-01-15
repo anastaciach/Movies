@@ -52,21 +52,16 @@ class OmbdFetchr {
                 response: Response<OmdbResponse>
             ) {
                 Log.d(TAG, "Response received")
-                val omdbResponse:
-                        OmdbResponse? = response.body()
-                val movieResponse:
-                        MovieResponse? = omdbResponse?.movies
-                var galleryItems:
-                        List<GalleryItem> = movieResponse?.galleryItems
-                    ?: mutableListOf()
-                galleryItems =
-                    galleryItems.filterNot {
-                        it.url.isBlank()
-                    }
-                responseLiveData.value =
-                    galleryItems
-            }
-        })
+                val omdbResponse: OmdbResponse? = response.body()
+                val movieItems: List<MovieItem>? = omdbResponse?.Search
+
+                val galleryItems: List<GalleryItem> = movieItems?.map {
+                    GalleryItem(it.Title, it.Year,it.imdbID,it.Type,it.Poster)
+                }.orEmpty().filterNot {
+                    it.Title.isBlank()
+                }
+                responseLiveData.value = galleryItems}
+            })
         return responseLiveData
     }
 }

@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit
 class AfterAddFragment : Fragment() {
     interface Callbacks {
         fun onSearch()
-        fun onAdd()
+        fun onAdd(galleryItem: GalleryItem)
     }
 
     private lateinit var titleField: EditText
@@ -46,6 +46,8 @@ class AfterAddFragment : Fragment() {
     private lateinit var url: String
     private lateinit var title: String
     private lateinit var year: String
+    private lateinit var imagePoster: ImageView
+    private lateinit var activ: String
     private var callbacks: Callbacks? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,10 +56,13 @@ class AfterAddFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        id = arguments?.getString("galleryItemId").toString()
-        url = arguments?.getString("galleryItemUrl").toString()
-        title = arguments?.getString("galleryItemTitle").toString()
-        year = arguments?.getString("galleryItemYear").toString()
+        activ = arguments?.getString("Activity").toString()
+        if (activ=="Search"){
+            id = arguments?.getString("galleryItemId").toString()
+            url = arguments?.getString("galleryItemUrl").toString()
+            title = arguments?.getString("galleryItemTitle").toString()
+            year = arguments?.getString("galleryItemYear").toString()
+        }
     }
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -73,10 +78,22 @@ class AfterAddFragment : Fragment() {
         searchButton.setOnClickListener {
             callbacks?.onSearch()
         }
-        addButton.setOnClickListener {
+        if (activ=="Search"){
             titleField.setText(title)
             dateButton.setText(year)
-            callbacks?.onAdd()
+            imagePoster = view.findViewById(R.id.imageView2) as ImageView
+            Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.bill_up_close)
+                .into(imagePoster)
+        }
+        addButton.setOnClickListener {
+            var galleryItem = GalleryItem()
+            galleryItem.imdbID = id
+            galleryItem.Title = title
+            galleryItem.Year = year
+            galleryItem.Poster = url
+            callbacks?.onAdd(galleryItem)
         }
         return view
     }
@@ -87,6 +104,6 @@ class AfterAddFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = BeforeAddFragment()
+        fun newInstance() = AfterAddFragment()
     }
 }

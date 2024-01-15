@@ -48,7 +48,7 @@ class AddActivity : AppCompatActivity(),BeforeAddFragment.Callbacks {
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
-    override fun onAdd() {
+    override fun onAddBefore() {
         val fragment = AfterAddFragment()
         supportFragmentManager
             .beginTransaction()

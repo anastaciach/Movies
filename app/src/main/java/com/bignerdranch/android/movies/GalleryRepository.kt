@@ -19,7 +19,7 @@ class GalleryRepository private constructor(context: Context) {
         .build()
     private val executor = Executors.newSingleThreadExecutor()
     fun getMovies(): LiveData<List<Item>> = database.galleryDao().getmovies()
-    private fun GalleryItem.toItem(): Item {
+    /*private fun GalleryItem.toItem(): Item {
         return Item(title, id, year)
     }
 
@@ -32,7 +32,7 @@ class GalleryRepository private constructor(context: Context) {
             }
         }
     }
-
+*/
     fun deleteMovie() {
         executor.execute {
             database.galleryDao().deletemovie()
