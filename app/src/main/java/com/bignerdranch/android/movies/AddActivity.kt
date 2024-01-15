@@ -30,7 +30,7 @@ class AddActivity : AppCompatActivity(),BeforeAddFragment.Callbacks {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainerAdd, fragment)
-                .addToBackStack(null)
+
                 .commit()
         }
         else
@@ -59,6 +59,7 @@ class AddActivity : AppCompatActivity(),BeforeAddFragment.Callbacks {
     }
     override fun onAdd(galleryItem: GalleryItem) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         movieGalleryViewModel.addMovie(galleryItem)
         startActivity(intent)
     }

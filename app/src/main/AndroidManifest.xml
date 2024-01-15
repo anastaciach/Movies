@@ -19,11 +19,13 @@
             android:name=".AddActivity"
             android:label="Add Movie"
             android:exported="false" />
+
         <activity
             android:name=".SearchActivity"
             android:label="Search Result"
             android:exported="false">
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="Movies to Watch"
