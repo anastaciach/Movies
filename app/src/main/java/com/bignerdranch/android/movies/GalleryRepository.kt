@@ -35,6 +35,11 @@ class GalleryRepository private constructor(context: Context) {
             }
         }
     }
+    fun updateItem(item: Item){
+        executor.execute {
+            database.galleryDao().updateItem(item)
+        }
+    }
     fun deleteMovie() {
         executor.execute {
             database.galleryDao().deletemovie()

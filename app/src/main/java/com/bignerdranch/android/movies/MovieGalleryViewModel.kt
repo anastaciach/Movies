@@ -39,4 +39,8 @@ class MovieGalleryViewModel(private val app: Application
     fun deleteMovie(){
         galleryRepository.deleteMovie(item.id)
     }
+    fun updateItem(item: Item, del:Int){
+        item.del = del
+        galleryRepository.updateItem(item)
+    }
 }
