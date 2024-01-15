@@ -10,17 +10,51 @@ class AddActivity : AppCompatActivity(),BeforeAddFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
-        val isFragmentContainerEmpty =
-            savedInstanceState == null
-        if (isFragmentContainerEmpty) {
+        val fragmentToOpen = intent.getStringExtra("fragmentToOpen")
+
+        if (fragmentToOpen == "lastFragment") {
+            val id = intent.getStringExtra("galleryItemId")
+            val title = intent.getStringExtra("galleryItemTitle")
+            val url = intent.getStringExtra("galleryItemUrl")
+            val year = intent.getStringExtra("galleryItemYear")
+
+            val fragment = AfterAddFragment().apply {
+                arguments = Bundle().apply {
+                    putString("galleryItemId", id)
+                    putString("galleryItemTitle", title)
+                    putString("galleryItemUrl", url)
+                    putString("galleryItemYear", year)
+                }
+            }
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragmentContainerAdd, BeforeAddFragment.newInstance())
+                .replace(R.id.fragmentContainerAdd, fragment)
+                .addToBackStack(null)
                 .commit()
         }
+        else
+        {
+            val isFragmentContainerEmpty =
+                savedInstanceState == null
+            if (isFragmentContainerEmpty) {
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragmentContainerAdd, BeforeAddFragment.newInstance())
+                    .commit()
+            }
+        }
     }
-    override fun onStart() {
-        super.onStart()
+    override fun onSearch() {
+        val intent = Intent(this, SearchActivity::class.java)
+        startActivity(intent)
+    }
+    override fun onAdd() {
+        val fragment = AfterAddFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainerAdd, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {
