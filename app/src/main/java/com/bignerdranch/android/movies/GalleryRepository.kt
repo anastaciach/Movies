@@ -24,7 +24,11 @@ class GalleryRepository private constructor(context: Context) {
     }
 
     fun addMovie(movie: GalleryItem) {
-        val item = movie.toItem()
+        var item = Item()
+        item.id = movie.imdbID
+        item.title = movie.Title
+        item.year = movie.Year
+        item.url = movie.Poster
         executor.execute {
             if (database.galleryDao().getmovie(item.id)!=item){
                 database.galleryDao().addmovie(item)

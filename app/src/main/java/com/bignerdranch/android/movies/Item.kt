@@ -10,5 +10,5 @@ data class Item(
     var year: String = "",
     var url: String = "",
     @PrimaryKey var id: String = "",
-    var delete: Boolean = 0
+    var del: Int = 0
 )
