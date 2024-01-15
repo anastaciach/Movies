@@ -20,7 +20,7 @@ class GalleryRepository private constructor(context: Context) {
     private val executor = Executors.newSingleThreadExecutor()
     fun getMovies(): LiveData<List<Item>> = database.galleryDao().getmovies()
     private fun GalleryItem.toItem(): Item {
-        return Item(Title, Year, Poster, imdbID)
+        return Item(Title, Year, Poster, imdbID,0)
     }
 
     fun addMovie(movie: GalleryItem) {

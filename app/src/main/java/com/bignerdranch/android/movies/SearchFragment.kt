@@ -56,7 +56,9 @@ class SearchFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.search_recycler, container, false)
         movieRecyclerView = view.findViewById(R.id.movie_recycler_view)
-        movieRecyclerView.layoutManager = GridLayoutManager(context, 1)
+        val orientation = resources.configuration.orientation
+        val spanCount = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 2 else 1
+        movieRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +96,7 @@ class SearchFragment : Fragment() {
         override fun onClick(v: View) {
             Toast.makeText(
                 context,
-                "Выбран фильм:${galleryItem.title}",
+                "Выбран фильм:${galleryItem.Title}",
                 Toast.LENGTH_SHORT
             ).show()
             callbacks?.onSelected(galleryItem)
