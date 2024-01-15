@@ -12,11 +12,13 @@ class SearchActivity : AppCompatActivity(),SearchFragment.Callbacks{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        val title = intent.getStringExtra("addgalleryItemTitle")
+        val year = intent.getStringExtra("addgalleryItemYear")
         val isFragmentContainerEmpty = savedInstanceState == null
         if (isFragmentContainerEmpty) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.searchFragmentContainer, SearchFragment.newInstance())
+                .add(R.id.searchFragmentContainer, SearchFragment.newInstance(title.toString(),year.toString()))
                 .commit()
         }
     }

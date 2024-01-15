@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit
 import com.sample.movies.R
 class BeforeAddFragment : Fragment() {
     interface Callbacks {
-        fun onSearch()
+        fun onSearch(title: String, year: String)
     }
     private lateinit var titleField: EditText
     private lateinit var dateButton: EditText
@@ -58,7 +58,7 @@ class BeforeAddFragment : Fragment() {
         dateButton = view.findViewById(R.id.year) as EditText
         searchButton = view.findViewById(R.id.search_button) as Button
         searchButton.setOnClickListener {
-            callbacks?.onSearch()
+            callbacks?.onSearch(titleField.text.toString(),dateButton.text.toString())
         }
         return view
     }

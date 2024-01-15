@@ -44,8 +44,10 @@ class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        movieGalleryViewModel =
-            ViewModelProviders.of(this).get(MovieGalleryViewModel::class.java)
+        val title = arguments?.getString("addgalleryItemTitle")
+        val year = arguments?.getString("addgalleryItemYear")
+        movieGalleryViewModel = ViewModelProviders.of(this).get(MovieGalleryViewModel::class.java)
+        movieGalleryViewModel.fetchMovies(title.toString())
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -127,6 +129,13 @@ class SearchFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = SearchFragment()
+        fun newInstance(title: String, year: String?): SearchFragment {
+            val fragment = SearchFragment()
+            val args = Bundle()
+            args.putString("addgalleryItemTitle", title)
+            args.putString("addgalleryItemYear", year)
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
