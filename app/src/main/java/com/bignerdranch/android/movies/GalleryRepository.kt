@@ -19,20 +19,18 @@ class GalleryRepository private constructor(context: Context) {
         .build()
     private val executor = Executors.newSingleThreadExecutor()
     fun getMovies(): LiveData<List<Item>> = database.galleryDao().getmovies()
-    /*private fun GalleryItem.toItem(): Item {
-        return Item(title, id, year)
+    private fun GalleryItem.toItem(): Item {
+        return Item(Title, Year, Poster, imdbID)
     }
-
 
     fun addMovie(movie: GalleryItem) {
         val item = movie.toItem()
         executor.execute {
-            if (database.galleryDao().getmovie(item.url)!=item){
+            if (database.galleryDao().getmovie(item.id)!=item){
                 database.galleryDao().addmovie(item)
             }
         }
     }
-*/
     fun deleteMovie() {
         executor.execute {
             database.galleryDao().deletemovie()
